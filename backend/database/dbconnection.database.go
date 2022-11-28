@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func Dbconnection() (*sql.DB, error) {
+func dbconnection() (*sql.DB, error) {
 	var dbConfig map[string]string
 	dbConfig, failed := godotenv.Read()
 
@@ -17,7 +17,7 @@ func Dbconnection() (*sql.DB, error) {
 
 	urlConnection := dbConfig["MYSQL_USER"] + ":" + dbConfig["MYSQL_PASSWORD"] + "@" + dbConfig["MYSQL_PROTOCOL"] + "(" + dbConfig["MYSQL_HOST"] + ":" + dbConfig["MYSQL_PORT"] + ")/" + dbConfig["MYSQL_DBNAME"]
 
-	db, failed := sql.Open("mysql", urlConnection)
+	db, failed := sql.Open(dbConfig["DRIVER_NAME"], urlConnection)
 
 	if failed != nil {
 		return nil, failed

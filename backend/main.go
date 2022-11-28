@@ -2,15 +2,12 @@ package main
 
 import (
 	"fmt"
-	"sitec/database"
+	"sitec/enuns"
 )
 
 func main() {
-	db, e := database.Dbconnection()
+	var c = enuns.Instagram
 
-	if db == nil {
-		fmt.Println(e.Error())
-	}
-
-	fmt.Println("Conectou")
+	fmt.Println(c)
+	fmt.Println(c.ContactsTypeToString())
 }
